@@ -1,0 +1,1 @@
+Extract Flickr8k_text.zip here.

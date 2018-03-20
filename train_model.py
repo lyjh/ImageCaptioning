@@ -7,9 +7,6 @@ cg = caption_generator.CaptionGenerator()
 cg.use_word_embedding = True
 image_caption_model = cg.create_model()
 
-# if weight != None:
-#     model.load_weights(weight)
-
 image_caption_model.load_weights('weights/weights-improvement-13-2.99.hdf5')
 file_name = 'weights/weights-improvement-{epoch:02d}-{loss:.2f}.hdf5'
 checkpoint = ModelCheckpoint(file_name, monitor='loss', verbose=1, save_best_only=True, save_weights_only=False, mode='auto', period=1)

@@ -1,9 +1,7 @@
 import glob
 from PIL import Image
 import numpy as np
-# import matplotlib.pyplot as plt
 import pickle
-# from tqdm import tqdm
 import pandas as pd
 from keras.preprocessing import sequence
 from keras.models import Sequential, Model, load_model
@@ -14,7 +12,6 @@ from keras.applications.inception_v3 import InceptionV3
 from keras.preprocessing import image
 from keras.callbacks import ModelCheckpoint, EarlyStopping
 import caption_generator
-# import nltk
 import os.path
 
 embedding_size = 300
@@ -23,23 +20,6 @@ max_cap_len = 40
 vocab_size = 8256
 
 unique = pickle.load(open('unique.p', 'rb'))
-# image_model = Sequential([
-#         Dense(embedding_size, input_shape=(2048,), activation='relu'),
-#         RepeatVector(max_cap_len)
-#     ])
-# caption_model = Sequential([
-#         Embedding(vocab_size, embedding_size, input_length=max_cap_len),
-#         LSTM(256, return_sequences=True),
-#         TimeDistributed(Dense(300))
-#     ])
-# image_caption_model = Sequential([
-#         Merge([image_model, caption_model], mode='concat', concat_axis=1),
-#         Bidirectional(LSTM(256, return_sequences=False)),
-#         Dense(vocab_size),
-#         Activation('softmax')
-#     ])
-# image_caption_model.compile(loss='categorical_crossentropy', optimizer=RMSprop(), metrics=['accuracy'])
-# image_caption_model.summary()
 
 cg = caption_generator.CaptionGenerator()
 image_caption_model = cg.create_model()

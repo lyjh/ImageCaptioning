@@ -5,10 +5,6 @@ import pickle
 import os.path
 from tqdm import tqdm
 from keras.preprocessing import sequence
-from keras.models import Sequential, Model, load_model
-from keras.layers import LSTM, Embedding, TimeDistributed, Dense, RepeatVector, Merge, Activation, Flatten
-from keras.optimizers import Adam, RMSprop
-from keras.layers.wrappers import Bidirectional
 from keras.applications.inception_v3 import InceptionV3
 from keras.preprocessing import image
 

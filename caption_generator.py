@@ -1,9 +1,6 @@
-import glob
 from PIL import Image
 import numpy as np
-# import matplotlib.pyplot as plt
 import pickle
-# from tqdm import tqdm
 import pandas as pd
 from keras.preprocessing import sequence
 from keras.models import Sequential, Model, load_model
@@ -13,7 +10,6 @@ from keras.layers.wrappers import Bidirectional
 from keras.applications.inception_v3 import InceptionV3
 from keras.preprocessing import image
 from keras.callbacks import ModelCheckpoint, EarlyStopping
-# import nltk
 import os.path
 
 EMBEDDING_DIM = 300
