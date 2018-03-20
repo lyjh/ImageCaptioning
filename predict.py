@@ -27,7 +27,7 @@ image_caption_model = cg.create_model()
 word2index = cg.word2index
 index2word = cg.index2word
 
-image_caption_model.load_weights('weights/weights-improvement-03-3.00.hdf5')
+image_caption_model.load_weights('weights/weights-improvement-06-2.98.hdf5')
 
 model = InceptionV3(weights='imagenet')
 new_input = model.input
