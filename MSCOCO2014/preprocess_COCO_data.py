@@ -46,8 +46,6 @@ def preprocess(image_path):
     x = preprocess_input(x)
     return x
 
-# plt.imshow(np.squeeze(preprocess(train_img[0])))
-
 model = InceptionV3(weights='imagenet')
 from keras.models import Model
 
@@ -66,7 +64,7 @@ if not os.path.exists('encoded_images_COCO_inceptionV3.p'):
     encoding_train = {}
     for img in img:
         encoding_train[img[len(images):]] = encode(img)
-    with open("encoded_images_inceptionV3.p", "wb") as encoded_pickle:
+    with open("encoded_images_COCO_inceptionV3.p", "wb") as encoded_pickle:
         pickle.dump(encoding_train, encoded_pickle) 
 
 encoding_train = pickle.load(open('encoded_images_COCO_inceptionV3.p', 'rb'))
@@ -86,14 +84,6 @@ unique = list(set(unique))
 
 with open("unique.p", "wb") as pickle_d:
     pickle.dump(unique, pickle_d) 
-
-max_len = 0
-for c in caps:
-    c = c.split()
-    if len(c) > max_len:
-        max_len = len(c)
-
-vocab_size = len(unique)
 
 f = open('mscoco_training_dataset.txt', 'w')
 f.write("image_id\tcaptions\n")
