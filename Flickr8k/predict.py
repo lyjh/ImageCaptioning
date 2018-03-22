@@ -14,20 +14,16 @@ from keras.callbacks import ModelCheckpoint, EarlyStopping
 import caption_generator
 import os.path
 
-embedding_size = 300
-batch_size = 128
-max_cap_len = 40
-vocab_size = 8256
-
 unique = pickle.load(open('unique.p', 'rb'))
 
 cg = caption_generator.CaptionGenerator()
+max_cap_len = cg.max_cap_len
 image_caption_model = cg.create_model()
 
 word2index = cg.word2index
 index2word = cg.index2word
 
-image_caption_model.load_weights('weights/weights-improvement-03-3.00.hdf5')
+image_caption_model.load_weights('weights/weights-improvement-15-2.95.hdf5')
 
 model = InceptionV3(weights='imagenet')
 new_input = model.input

@@ -1,2 +1,5 @@
 *.p
 *.txt
+*.hdf5
+*.pyc
+*.jpg
