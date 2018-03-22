@@ -87,9 +87,6 @@ unique = list(set(unique))
 with open("unique.p", "wb") as pickle_d:
     pickle.dump(unique, pickle_d) 
 
-word2idx = {val:index for index, val in enumerate(unique)}
-idx2word = {index:val for index, val in enumerate(unique)}
-
 max_len = 0
 for c in caps:
     c = c.split()
@@ -105,10 +102,3 @@ for key, val in image2caption.items():
     f.write(key + "\t" + "<start> " + val +" <end>" + "\n")
 
 f.close()
-
-df = pd.read_csv('mscoco_training_dataset.txt', delimiter='\t')
-df = df.dropna()
-c = [i for i in df['captions']]
-samples_per_epoch = 0
-for ca in c:
-    samples_per_epoch = samples_per_epoch + len(ca.split())-1

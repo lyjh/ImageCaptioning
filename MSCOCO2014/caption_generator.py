@@ -25,6 +25,7 @@ class CaptionGenerator():
         self.validation_samples = None
         self.use_word_embedding = False
         self.encoded_images = pickle.load( open( "encoded_images_COCO_inceptionV3.p", "rb" ) )
+        # self.encoded_val_images = pickle.load( open( "encoded_images_val_COCO_inceptionV3.p", "rb" ) )
         self.variable_initializer()
 
     def variable_initializer(self):
@@ -65,7 +66,7 @@ class CaptionGenerator():
         next_words = []
         images = []
         
-        dataset = 'mscoco_training_dataset.txt' if mode == 'train' else 'flickr8k_validation_dataset.txt'
+        dataset = 'mscoco_training_dataset.txt' if mode == 'train' else 'mscoco_validation_dataset.txt'
         encode = self.encoded_images if mode == 'train' else self.encoded_val_images
         df = pd.read_csv(dataset, delimiter='\t')
         df = df.dropna()
@@ -121,7 +122,7 @@ class CaptionGenerator():
                 embeddings_index[word] = coefs
             f.close()
 
-            embedding_matrix = np.zeros((self.vocab_size+1, EMBEDDING_DIM))
+            embedding_matrix = np.zeros((self.vocab_size, EMBEDDING_DIM))
             for word, i in self.word2index.items():
                 embedding_vector = embeddings_index.get(word)
                 if embedding_vector is not None:
@@ -138,7 +139,7 @@ class CaptionGenerator():
         ])
 
         if self.use_word_embedding:
-            embedding_matrix = self.get_or_load_embedding_matrix('glove_embedding_matrix.p', 'glove.42B.300d.txt')[:-1,:]
+            embedding_matrix = self.get_or_load_embedding_matrix('glove_embedding_matrix.p', 'glove.42B.300d.txt')
         
             caption_model = Sequential([
                     Embedding(self.vocab_size, EMBEDDING_DIM, input_length=self.max_cap_len, weights=[embedding_matrix], trainable=False),
